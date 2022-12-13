@@ -3,13 +3,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Password {
 
 	StringBuilder sb = new StringBuilder();
-	int passwordLength;
+	int passwordLength = getLength();
 	boolean isUppercase = false;
 	boolean isLowercase = false;
 	boolean isNumber = false;
@@ -23,10 +24,10 @@ public class Password {
 	String lowercasePart1;
 	String spassword = uppercasePart + lowercasePart + numberPart + symbolPart;
 	int isTrue;
+	char[] password = new char[passwordLength];
 	
 	public Password() {
 		
-		this.passwordLength = PasswordLength();
 		this.isUppercase = isUppercase();
 		this.isLowercase = isLowercase();
 		this.isNumber = isNumber();
@@ -41,60 +42,79 @@ public class Password {
 	
 	// Method to decide password length
 	
-	public int PasswordLength() {
+	public int getLength() {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Please declare your desired password length: ");
-		int pwLength = in.nextInt();
-		return pwLength;
+		try {
+			int pwLength = in.nextInt();
+			return pwLength;
+		} catch(InputMismatchException e) {
+			System.out.println("Be so kind to only use positive numerals");
+			return getLength();
+		}
 	}
 	
 	// Method to determine if uppercase is wanted in the password
-	public boolean isUppercase() {
+	public boolean isUppercase() throws NoSuchElementException{
 		Scanner in = new Scanner(System.in);
 		System.out.print("Do you want uppercase letters in your password? Y/N: ");
 		char answer = in.next().toUpperCase().charAt(0);
-		if (answer == 'Y') {
+			if (answer == 'Y') {
 			return isUppercase = true;
-		} else {
+			} else if (answer == 'N') {
 			return isUppercase = false;
-		}
+			} else {
+				System.out.println("Be so kind to only enter 'Y' for Yes and 'N' for No");
+				return isUppercase();
+			}
 		
 	}
 	
 	// Method to determine if lowercase is wanted in the password
-	public boolean isLowercase() {
+	public boolean isLowercase() throws NoSuchElementException{
 		Scanner in = new Scanner(System.in);
 		System.out.print("Do you want lowercase letters in your password? Y/N: ");
 		char answer = in.next().toUpperCase().charAt(0);
-		if (answer == 'Y') {
+			if (answer == 'Y') {
 			return isLowercase = true;
-		} else {
+			} else if (answer == 'N') {
 			return isLowercase = false;
-		}
+			} else {
+				System.out.println("Be so kind to only enter 'Y' for Yes and 'N' for No");
+				return isLowercase();
+			}
+		
 	}
 	
 	// Method to determine if numbers is wanted in the password
-	public boolean isNumber() {
+	public boolean isNumber() throws NoSuchElementException{
 		Scanner in = new Scanner(System.in);
 		System.out.print("Do you want numbers in your password? Y/N: ");
 		char answer = in.next().toUpperCase().charAt(0);
-		if (answer == 'Y') {
+			if (answer == 'Y') {
 			return isNumber = true;
-		} else {
+			} else if (answer == 'N') {
 			return isNumber = false;
-		}
+			} else {
+				System.out.println("Be so kind to only enter 'Y' for Yes and 'N' for No");
+				return isNumber();
+			}
+		
 	}
-	
 	// Method to determine if symbols is wanted in the password
-	public boolean isSymbol() {
+	public boolean isSymbol() throws NoSuchElementException{
 		Scanner in = new Scanner(System.in);
 		System.out.print("Do you want symbols in your password? Y/N: ");
 		char answer = in.next().toUpperCase().charAt(0);
-		if (answer == 'Y') {
+			if (answer == 'Y') {
 			return isSymbol = true;
-		} else {
+			} else if (answer == 'N') {
 			return isSymbol = false;
-		}
+			} else {
+				System.out.println("Be so kind to only enter 'Y' for Yes and 'N' for No");
+				return isSymbol();
+			}
+		
 	}
 	
 	// Method to generate password
