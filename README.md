@@ -13,7 +13,7 @@ If the password is a odd number and the number of preferences is even, the passw
 
 For future improvement:
 
-1.Exception handling for console inputs(Scanner) - Example InputMismatchException on Scanner.nextInt(). My issue is that I cannot figure out how to return the value, if I use a try catch method to avoid the user, inputting the wrong in the wrong data type.
+1.Exception handling for console inputs(Scanner) - Example InputMismatchException on Scanner.nextInt(). My issue is that I cannot figure out how to return the value, if I use a try catch method to avoid the user, inputting the wrong in the wrong data type. ✔
 
 2.Password Validator - A validator that will deem a password secure or not, based on subjective values
 
