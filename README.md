@@ -1,6 +1,6 @@
 # PasswordGenerator
 The Password Generator is used to create a random password from different inputs from the user(console).
-The user determines whether or not the user wants uppercase, lowercase, symbols, numbers or a combination of the four in the password.
+The user determines whether or not the user wants uppercase, symbols, numbers or a combination of the three in the password.
 Furthermore the user determines the length of the password.
 
 For future improvement:
@@ -9,9 +9,9 @@ For future improvement:
 
 2.Password Validator - A validator that will deem a password secure or not, based on subjective values - this will only be valid if the generated password has an uneven mix of the chosen preferences. As of now, the password has the same amount of symbols as numbers (if both is chosen),
 
-3.Password Length requirement of minimum 8 characters.
+3.Password Length requirement of minimum 8 characters ✔
 
-4. One major issue with the program:
+4.One major issue with the program: ✔
 
 When choosing to use uppercase, lowercase, symbols and numbers in the password, the math behind it is passwordlength(from user input) / the number of preferences chosen (using uppercase, lowercase and symbols is 3).
 
