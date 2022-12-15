@@ -1,18 +1,16 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.stream.Collectors;
+
 
 public class Password {
 
 	StringBuilder sb = new StringBuilder();
 	int passwordLength = getLength();
 	boolean isUppercase = false;
-	boolean isLowercase = false;
+	boolean isLowercase = true;
 	boolean isNumber = false;
 	boolean isSymbol = false;
 	String generator;
@@ -23,13 +21,15 @@ public class Password {
 	String shuffle;
 	String lowercasePart1;
 	String spassword = uppercasePart + lowercasePart + numberPart + symbolPart;
+	int remainder;
+	String appendRemainder;
 	int isTrue;
 	char[] password = new char[passwordLength];
 	
 	public Password() {
 		
 		this.isUppercase = isUppercase();
-		this.isLowercase = isLowercase();
+		//this.isLowercase = isLowercase();
 		this.isNumber = isNumber();
 		this.isSymbol = isSymbol();
 		this.isTrue = upperTrue() + lowerTrue() + numberTrue() + symbolTrue();
@@ -37,6 +37,8 @@ public class Password {
 		this.lowercasePart = appendLowercase(passwordLength/isTrue);
 		this.numberPart = appendNumber(passwordLength/isTrue);
 		this.symbolPart = appendSymbol(passwordLength/isTrue);
+		this.remainder = remainder();
+		this.appendRemainder = appendRemainder(passwordLength%isTrue);
 		this.generator = generator();
 	}
 	
@@ -44,10 +46,15 @@ public class Password {
 	
 	public int getLength() {
 		Scanner in = new Scanner(System.in);
-		System.out.print("Please declare your desired password length: ");
+		System.out.print("Please declare your desired password length. The password must have a minimum length of 8: ");
 		try {
 			int pwLength = in.nextInt();
+			if (pwLength >= 8) {
 			return pwLength;
+			} else {
+				System.out.println("Your password must be a minimum of 8 characters. Please input a valid number");
+				return getLength();
+			}
 		} catch(InputMismatchException e) {
 			System.out.println("Be so kind to only use positive numerals");
 			return getLength();
@@ -66,22 +73,6 @@ public class Password {
 			} else {
 				System.out.println("Be so kind to only enter 'Y' for Yes and 'N' for No");
 				return isUppercase();
-			}
-		
-	}
-	
-	// Method to determine if lowercase is wanted in the password
-	public boolean isLowercase() throws NoSuchElementException{
-		Scanner in = new Scanner(System.in);
-		System.out.print("Do you want lowercase letters in your password? Y/N: ");
-		char answer = in.next().toUpperCase().charAt(0);
-			if (answer == 'Y') {
-			return isLowercase = true;
-			} else if (answer == 'N') {
-			return isLowercase = false;
-			} else {
-				System.out.println("Be so kind to only enter 'Y' for Yes and 'N' for No");
-				return isLowercase();
 			}
 		
 	}
@@ -123,6 +114,7 @@ public class Password {
 		if (isLowercase) sb.append(lowercasePart);
 		if (isNumber) sb.append(numberPart);
 		if (isSymbol) sb.append(symbolPart);
+		if (isLowercase) sb.append(appendRemainder);
 		return sb.toString();
 		}
 	
@@ -187,6 +179,23 @@ public class Password {
 			} return sb.toString();
 		} 
 		
+		// Method to calculate remainder when password is divided
+		public int remainder() {
+			int remainder = passwordLength%isTrue;
+			if (passwordLength/isTrue > 0);
+			return remainder;
+		}  
+		
+		// Method to append remainder
+		public String appendRemainder(int n) {
+			String LOWERCASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < n; i++) {
+				int index = (int)(LOWERCASE_LETTERS.length()*Math.random());
+				sb.append(LOWERCASE_LETTERS.charAt(index));
+			} return sb.toString();
+		} 
+		
 		// Method to shuffle the password
 		
 		 public String shuffle(){
@@ -201,7 +210,8 @@ public class Password {
 		        }
 		        return output.toString();
 		
-}	
+		 }	
+		 
 }
 		
 	
