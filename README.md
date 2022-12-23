@@ -5,7 +5,7 @@ Furthermore the user determines the length of the password to allow the user to 
 
 The password generator is designed to be simple and userfriendly.
 
-The program uses following:
+The program uses the following:
 
 * StringBuilder
 * Conditional Statements
